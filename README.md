@@ -21,11 +21,11 @@ docker build -t vss_checkin:verion1 -f Dockerfile .
 ```
 # exec docker container 
 ```bash
-docker exec -it "docker_container_name" /bin/sh
+docker exec -it "docker_container_name" /bash
 ```
 - example: 
 ```bash
-docker exec -it checkin_container /bin/sh
+docker exec -it checkin_container /bash
 ```
 
 # run folder docker 
