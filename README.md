@@ -60,3 +60,26 @@ docker stop checkin_container
 sudo docker logs -f checkin_container
 ```
 
+# build image
+```
+docker pull python:3.9.10
+# window
+docker run -itd --name test_gpu --gpus all -v ${PWD}:/home/data_docker python:3.9.10
+# linux
+docker run -itd --name test_gpu --gpus all -v $(pwd):/home/data_docker python:3.9.10 
+docker exec -it test_gpu bash
+docker stop test_gpu
+
+# export image
+docker commit test_gpu python_gpu:v1
+docker save --output python_gpu_v1.tar python_gpu:v1
+
+# load image
+docker load -i python_gpu_v1.tar
+
+# linux GPU
+docker run -itd --name test_gpu --gpus all -v $(pwd):/home/data_docker python_gpu:v1
+# linux CPU
+docker run -itd --name test_gpu -v $(pwd):/home/data_docker python_gpu:v1
+docker exec -it test_gpu bash
+```
